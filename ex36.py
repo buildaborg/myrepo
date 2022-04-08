@@ -25,6 +25,10 @@ def start():
         start()
 
 def points():
+<<<<<<< HEAD
     print("something else")
+=======
+    print("something something")
+>>>>>>> ab4ee33eca49944fc8aa00e12c80fd36da5356f7
     
 start()
