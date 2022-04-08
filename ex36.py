@@ -25,6 +25,6 @@ def start():
         start()
 
 def points():
-    print("something")
+    print("something something")
     
 start()
