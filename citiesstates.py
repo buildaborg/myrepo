@@ -9,7 +9,7 @@ provinces = {
 
 cities = {
     'ON': 'Toronto',
-    'QB': 'Montreal',
+    'QC': 'Montreal',
     'MB': 'Winnipeg'}
 
 cities['BC'] = 'Victoria'
@@ -28,3 +28,17 @@ print("Quebec's Abbreviation is:", provinces['Quebec'])
 
 print('-' * 10)
 print("Ontario has:", cities[provinces['Ontario']])
+print("Quebec has:", cities[provinces['Quebec']])
+
+print('-' * 10)
+print(list(provinces.items()))
+print('-' * 10)
+for whatever, abbrev in list(provinces.items()):
+    print(whatever)
+    print('#' * 10)
+    print(f"{whatever} is abbreviated {abbrev}")
+      
+print('%' * 10)
+for abbrev, city in list(cities.items()):
+    print(f"{abbrev} has the city {city}")
+          
