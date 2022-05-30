@@ -37,8 +37,22 @@ for whatever, abbrev in list(provinces.items()):
     print(whatever)
     print('#' * 10)
     print(f"{whatever} is abbreviated {abbrev}")
+    
       
 print('%' * 10)
 for abbrev, city in list(cities.items()):
     print(f"{abbrev} has the city {city}")
+    
+for whatever, abbrev in list(provinces.items()):
+    print(f"{whatever} is abbreviated {abbrev}")
+    print(f"{abbrev} has the city {cities[abbrev]}")
+
+province = provinces.get('Nova Scotia')
+
+if not province:
+    print("Sorry no cities for Nova Scotia")
+    
+city = cities.get('NS', "Does not exist")
+print(f"The city for  the province of 'NS' is: {city}")
+    
           
