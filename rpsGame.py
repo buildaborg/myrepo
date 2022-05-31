@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import random, sys
 
 print('ROCK, PAPER, SCISSORS')
@@ -35,3 +36,13 @@ while True:
     elif randomNumber == 3:
         computerMove = 's'
         print('SCISSORS')
+=======
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May 29 16:15:59 2022
+
+@author: Steve
+"""
+
+import random, sys
+>>>>>>> 21b595f1101b5089232ca34eea36d5e0ff4ced13
