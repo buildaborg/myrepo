@@ -42,4 +42,13 @@ while True: #main rpogram loop
             aboveCoord = ( y - 1) % HEIGHT
             belowCoord = (y + 1) % HEIGHT
             
+            #Count  number of living neighbours
+            numNeighbours = 0
+            if currentCells[leftCoord][aboveCoord] == '#':
+                numNeighbours += 1 # top left neighbour is alive
+            if currentCells[x][aboveCoord] == '#':
+                numNeighbours += 1 # Top neighbour is alive
+            if currentCells[rightCoord][aboveCoord] == '#':
+                numNeighbours[leftCoord][y] == '#' # top right neighbour is alive
             
+                
