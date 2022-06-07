@@ -49,6 +49,30 @@ while True: #main rpogram loop
             if currentCells[x][aboveCoord] == '#':
                 numNeighbours += 1 # Top neighbour is alive
             if currentCells[rightCoord][aboveCoord] == '#':
-                numNeighbours[leftCoord][y] == '#' # top right neighbour is alive
+                numNeighbours += 1 # top right neighbour is alive
+            if currentCells[leftCoord][y] == '#':
+                numNeighbours += 1 #left neighbour is alive
+            if currentCells[rightCoord][y] == '#':
+                numNeighbours += 1 #right neighbour is alive
+            if currentCells[leftCoord][belowCoord] == '#':
+                numNeighbours += 1 # bottom left neighbour is alive
+            if currentCells[x][belowCoord] == '#': # bottom neighbour is alive
+                numNeighbours += 1 #bottom neighbour is alive
+            if currentCells[rightCoord][belowCoord] == '#':
+                numNeighbours += 1 # bottom right neighbour is alive
+                
+            # set cell based on Conway's game of life rules:
+            if currentCells[x][y] == '#' and (numNeighbours == 2 or numNeighbours ==3):
+                #Living cells with 2 or 3 neighbours stay alive
+                nextCells[x][y] = '#'
+            elif currentCells[x][y] == ' ' and numNeighbours == 3:
+                # dead cells with 3 neighbours become alive
+                nextCells[x][y] = '#'
+            else:
+                #everything else dies or stays dead
+                nextCells[x][y] = ' '
+    time.sleep(1) # Add a 1-second pause to reduce flickering
+            
+                
             
                 
