@@ -22,32 +22,29 @@ def addToInventory(inventory, addedItems):
                   
 
 inv = {'gold coin': 42, 'rope': 1}
+invc = inv.copy()
 dragonLoot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
 #inv = addToInventory(inv, dragonLoot)
 #displayInventory(inv)
 
 #adding new values to dictionary
 for x in dragonLoot:
-    print(x)
-    inv.setdefault(x, 0)
+    invc.setdefault(x, 0)
 
-count = 0
-for x in range(len(dragonLoot)):
-    print(x)
-    count = 0
-    if x == inv[dragonLoot[x]]:
-        count = count + 1
-        print(f"count: {count}, inv[x] ={inv[x]}")
-        inv[x] = count
-for h in inv.keys():
-    print(h)
+for h in invc.keys():
     for b in dragonLoot:
-        print(b)
         count = 0
         if b == h:
             count = count + 1
-            print(count)
-            inv[b] = count
+        invc[b] = invc[b] + count
             
-    
-print(inv)
+def displayInventory(inventory):
+    print("Inventory:")
+    item_total = 0
+    for k, v in inventory.items():
+        #print((inventory[v]) , ' ' , (inventory[k]))
+        #print(inventory[k], end = ' ')
+        print(v, k)
+        item_total = item_total + 1
+    print("Total number of items: " + str(item_total))
+displayInventory(invc)
