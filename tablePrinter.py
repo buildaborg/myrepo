@@ -4,7 +4,7 @@ Created on Sat Jun 25 22:00:20 2022
 
 @author: mckeo
 """
-
+#
 def tablePrint(inputTable):
     #TODO
     blankList =[]
@@ -26,10 +26,10 @@ tableData = [['apples', 'oranges', 'cherries', 'banana'],
              ['dogs', 'cats', 'moose', 'goose']]
 
 #tablePrint(tableData)
-
+innerList = []
 blankList =[]
 for li in range(0, len(tableData)):
-    innerList = []
+    
     print(li)
     print('#' * 20)
     tableData[li]
@@ -37,5 +37,7 @@ for li in range(0, len(tableData)):
     #return currentList
     for y in range(0, len(currentList)):
         innerList.append(len(currentList[y]))
-            
-    blankList.append(innerList)
+        print(currentList[y])
+
+maxWidth = max(currentList)
+print(maxWidth)
