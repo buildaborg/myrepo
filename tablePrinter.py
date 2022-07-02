@@ -28,6 +28,7 @@ tableData = [['apples', 'oranges', 'cherries', 'banana'],
 #tablePrint(tableData)
 innerList = []
 blankList =[]
+#Checking the length of each string in list
 for li in range(0, len(tableData)):
     
     print(li)
@@ -39,5 +40,25 @@ for li in range(0, len(tableData)):
         innerList.append(len(currentList[y]))
         print(currentList[y])
 
-maxWidth = max(currentList)
+maxWidth = max(innerList)
 print(maxWidth)
+print(f"Blank list: {blankList}")
+print(f"innerList: {innerList}")
+
+
+#printing with adjusted list
+for x in range(0, len(tableData)):
+   justified = ''
+   #print(f"Is this doing anything: str{tableData[x]}.rjust{maxWidth}")
+   #print(f'{x} is x')
+   sublist = tableData[x]
+   #print('\n')
+   for y in range(0,len(sublist)):
+       #print(f"This is y: {y}")
+       listStr = sublist[y]
+       rjustStr = listStr.rjust(maxWidth+ 1)
+       #print(f'{listStr} is listStr')
+       justified += rjustStr
+   print(justified)
+       
+
