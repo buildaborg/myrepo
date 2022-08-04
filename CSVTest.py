@@ -5,7 +5,8 @@ Created on Tue Jun 28 13:17:26 2022
 @author: Steve
 """
 
-file = 'E:/Downloads/pcbanking7.csv'
+file2 = 'E:/Downloads/pcbanking7.csv'
+file = 'D:/pcbanking5.csv'
 datastorage =[]
 date = []
 item = []
@@ -13,6 +14,9 @@ cost = []
 jan = []
 feb =[]
 mar =[]
+jun = []
+jul = []
+aug = []
 allMonths = []
 
 
@@ -31,10 +35,12 @@ with open(file, newline='') as csvfile:
         
         adate = datastorage[rowcount][0]
         datest = datetime.datetime.strptime(adate,"%m/%d/%Y")
-        if datest.month == 1:
-            jan.append(row)
-        if datest.month == 2:
-            feb.append(row)
+        if datest.month == 7:
+            jul.append(row)
+        if datest.month == 8:
+            aug.append(row)
+        if datest.month == 6:
+            jun.append(row)
         rowcount += 1
         for col in row:
             print(col)
