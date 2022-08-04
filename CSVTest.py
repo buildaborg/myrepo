@@ -30,7 +30,13 @@ with open(file, newline='') as csvfile:
     #writer = csv.writer(csvfile, dialect=dialectclass)
     reader = csv.reader(csvfile, delimiter=',')
     for row in reader:
+        
+        if ('hyska' or "steven & julie's") in row[1].lower():
+            row.append('Grocery')
+        else:
+            row.append('Uncategorized')
         print(row)
+        print(row[1])
         datastorage.append(row)
         
         adate = datastorage[rowcount][0]
@@ -42,10 +48,10 @@ with open(file, newline='') as csvfile:
         if datest.month == 6:
             jun.append(row)
         rowcount += 1
-        for col in row:
-            print(col)
-            colcount += 1
-            print(colcount)
+        #for col in row:
+         #   print(col + 'colcount')
+          #  colcount += 1
+           # print(colcount)
                                                     
     print(f"There are {rowcount +1} rows in this file")
 
