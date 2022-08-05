@@ -19,6 +19,8 @@ jul = []
 aug = []
 allMonths = []
 
+grocerylist = ['hyska', "steven & julie's", 'pc express']
+takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill','little ceasers']
 
 rowcount = 0
 colcount = 0
@@ -31,12 +33,33 @@ with open(file, newline='') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     for row in reader:
         
-        if ('hyska' or "steven & julie's") in row[1].lower():
+        if [True for x in grocerylist if x in row[1].lower()]: #('hyska' or "steven & julie's" or 'pc express') in row[1].lower():
             row.append('Grocery')
+            cat = 'Grocery'
+        elif [True for x in takeoutlist if x in row[1].lower()]:
+            row.append('Take-out')
+            cat = 'Take-out'
+        elif ('cdn tire' or 'rona' or 'home harware') in row[1].lower():
+            row.append('Hardware Store')
+            cat = 'Hardware Store'
+        elif ('mecp' or 'hugli') in row[1].lower():
+            row.append('Recreation')
+            cat = 'Recreation'
+        elif ('wal-mart' or 'dollarama' or 'amzn' or 'shoppers' or 'looking glass' or 'siegel') in row[1].lower():
+            row.append('Household')
+            cat = 'Household'
+        elif ('ultramar' or 'mrgas' or 'shell') in row[1].lower():
+            row.append('Gas')
+            cat = 'household'
+        elif 'autoparts' in row[1].lower():
+            row.append('Vehicle')
+            cat = 'vehicle'            
         else:
             row.append('Uncategorized')
-        print(row)
+            cat = 'uncat'
+        #print(row)
         print(row[1])
+        print(cat)
         datastorage.append(row)
         
         adate = datastorage[rowcount][0]
