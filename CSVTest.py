@@ -6,8 +6,8 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime,calendar
 
-file2 = 'E:/Downloads/pcbanking7.csv'
-file = 'D:/pcbanking5.csv'
+file = 'E:/Downloads/2022Scotia.csv'
+file2 = 'D:/pcbanking5.csv'
 datastorage =[]
 date = []
 item = []
@@ -19,25 +19,29 @@ Dec = []
 allMonths = []
 
 months = {}
-MonthlySum = {}
+allExpensesByMonth = {}
 for x in range(1,13):
     month = str(x)
     #print(calendar.month_abbr[x])
     val = calendar.month_abbr[x]
     currentval = val
     months[month] = val
-    MonthlySum[val] = []
+    allExpensesByMonth[val] = []
 
-grocerylist = ['hyska', "steven & julie's", 'pc express']
-takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill','little caesars',"kelseys"]
-hardwarelist = ['cdn tire','rona','home harware']
-reclist = ['mecp','hugli']
-householdlist = ["hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel']
-gaslist = ['mrgas','ultramar','shell']
-vehiclecat = ['autoparts']
-subscriptionList = ['google','disney','globe and mail']
+grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside']
+takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill',
+               'little caesars',"kelsey",'zaffran','mount molson','pho','aramark',
+               'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke']
+hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot']
+reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster']
+householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's"]
+gaslist = ['mrgas','ultramar','shell','esso']
+vehiclecat = ['autoparts','mto']
+subscriptionList = ['google','disney','globe and mail','siriusxm','spotify']
 dogList = ['animal hosp']
 boozeList = ['beer store','lcbo']
+clothingList = ['oshkosh','calikids','sport chek']
+schoolStuff = ['rcdsb','well.ca']
 
 rowcount = 0
 colcount = 0
@@ -60,7 +64,7 @@ with open(file, newline='') as csvfile:
             row.append('Household')
         elif [True for x in gaslist if x in row[1].lower()]:
             row.append('Gas')
-        elif 'autoparts' in row[1].lower():
+        elif [True for x in vehiclecat if x in row[1].lower()]:
             row.append('Vehicle')
         elif 'CIBC' in row[1]:
             row.append('Payment')
@@ -70,6 +74,10 @@ with open(file, newline='') as csvfile:
             row.append('Subscriptions')
         elif [True for x in dogList if x in row[1].lower()]:
             row.append('Vet Bills')
+        elif [True for x in clothingList if x in row[1].lower()]:
+            row.append('Clothing')
+        elif [True for x in schoolStuff if x in row[1].lower()]:
+            row.append('School-related')
         elif 'cogeco' in row[1].lower():
             row.append('Internet')
         else:
@@ -80,7 +88,7 @@ with open(file, newline='') as csvfile:
         #print(row[2])
         datastorage.append(row)
         if row[3] == 'Uncategorized' :
-            print(row[1])
+            print(row[1] , row[2])
         
         #determine month
         adate = datastorage[rowcount][0]
@@ -99,13 +107,13 @@ with open(file, newline='') as csvfile:
             Jun.append(row)
         rowcount += 1
         #for x in
-        #append row values to MonthlySum Dict
+        #append row values to allExpensesByMonth Dict
         targetMonth = months[str(datest.month)]
-        MonthlySum[targetMonth] = MonthlySum[targetMonth] + [row]
+        allExpensesByMonth[targetMonth] = allExpensesByMonth[targetMonth] + [row]
 
                                             
     print(f"There are {rowcount +1} rows in this file")
-
+ExpenseSummaryByMonth = {}
 #Function to determine total value for each category by month
 def sumMonth(monthlysummary):
     storageDict = {}
@@ -115,13 +123,16 @@ def sumMonth(monthlysummary):
             storageDict.setdefault(x[3],x[2])
         else:
            currentval = storageDict[x[3]]
-           storageDict[x[3]] = x[2] + currentval
-    #print('Monthly expenses for:')
-    #print(storageDict)
+           storageDict[x[3]] = round(x[2] + currentval, 2)
+    ExpenseSummaryByMonth[k] = storageDict
+    print(f'Monthly expenses for: {months[str(k)]}')
+    for g, h in storageDict.items():
+        print(g, ':', h)
 
 
-sumMonth(Jun)
-sumMonth(Jul)
-
+#sumMonth(Jun)
+#sumMonth(Jul)
+for k in months:
+    sumMonth(allExpensesByMonth[months[k]])
 
     
