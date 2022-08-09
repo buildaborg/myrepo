@@ -125,9 +125,11 @@ def sumMonth(monthlysummary):
            currentval = storageDict[x[3]]
            storageDict[x[3]] = round(x[2] + currentval, 2)
     ExpenseSummaryByMonth[k] = storageDict
-    print(f'Monthly expenses for: {months[str(k)]}')
-    for g, h in storageDict.items():
-        print(g, ':', h)
+    if len(ExpenseSummaryByMonth[k]) > 0:
+        print(f'Monthly expenses for: {months[str(k)]}')
+        for g, h in storageDict.items():
+
+            print(g, ':', h)
 
 
 #sumMonth(Jun)
