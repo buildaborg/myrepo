@@ -127,9 +127,12 @@ def sumMonth(monthlysummary):
     ExpenseSummaryByMonth[k] = storageDict
     if len(ExpenseSummaryByMonth[k]) > 0:
         print(f'Monthly expenses for: {months[str(k)]}')
+        #@todo sort alphabetically first
+        sortedvals = sorted(ExpenseSummaryByMonth.keys())
         for g, h in storageDict.items():
 
             print(g, ':', h)
+        print('\n\n\n')
 
 
 #sumMonth(Jun)
