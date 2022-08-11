@@ -6,8 +6,8 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime,calendar
 
-file = 'E:/Downloads/2022Scotia.csv'
-file2 = 'D:/pcbanking5.csv'
+file2 = 'E:/Downloads/2022Scotia.csv'
+file = 'D:/pcbanking5.csv'
 datastorage =[]
 date = []
 item = []
@@ -140,4 +140,16 @@ def sumMonth(monthlysummary):
 for k in months:
     sumMonth(allExpensesByMonth[months[k]])
 
-    
+#create list from dict
+forGraphing = ExpenseSummaryByMonth['7']
+listGraph = forGraphing.keys()
+print(listGraph)
+graphlist = []
+
+for c in listGraph:
+    graphlist.append([c, forGraphing[c] ])
+    #graphlist.append(str(c))
+    #graphlist.append(forGraphing[c])
+print(graphlist)
+
+listGraph.values()
