@@ -15,8 +15,8 @@ import csv, datetime, calendar
 import numpy as np
 import matplotlib.pyplot as plt
 
-file2 = 'E:/Downloads/2022Scotia.csv'
-file = 'D:/pcbanking5.csv'
+file = 'E:/Downloads/2022Scotia.csv'
+file2 = 'D:/pcbanking5.csv'
 datastorage =[]
 date = []
 item = []
@@ -145,11 +145,11 @@ for k in months:
 #create list from dict
 forGraphing = ExpenseSummaryByMonth['7']
 listGraph = forGraphing.keys()
-print(listGraph)
 graphlist = []
 graphlist2 = []
 valuesOnly = []
 keysOnly= []
+sumExpensesM = 0
 
 for c in listGraph:
     if c != 'Payment':    
@@ -157,6 +157,8 @@ for c in listGraph:
         graphlist.append([c, forGraphing[c] ])
         valuesOnly.append(forGraphing[c])
         graphlist2.append(([c],[forGraphing[c]]))
+        sumExpensesM += forGraphing[c]
+        print(sumExpensesM)
     else:
         continue
         #graphlist.append(str(c))
