@@ -16,7 +16,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 file2 = 'E:/Downloads/2022Scotia.csv'
-file = 'D:/pcbanking5.csv'
+file = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -26,6 +26,8 @@ Oct = []
 Nov = []
 Dec = []
 allMonths = []
+CatSplitStorage = []
+
 
 months = {}
 allExpensesByMonth = {}
@@ -40,10 +42,11 @@ for x in range(1,13):
 grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside']
 takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill',
                'little caesars',"kelsey",'zaffran','mount molson','pho','aramark',
-               'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke']
+               'mcgees','dominos','subway','nelson street pub','boston pizza',
+               'valleysmoke', 'fijisan', 'a & w']
 hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot']
 reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster']
-householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's"]
+householdlist = ['costco','amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's"]
 gaslist = ['mrgas','ultramar','shell','esso']
 vehiclecat = ['autoparts','mto']
 subscriptionList = ['google','disney','globe and mail','siriusxm','spotify']
@@ -76,7 +79,8 @@ with open(file, newline='') as csvfile:
         elif [True for x in vehiclecat if x in row[1].lower()]:
             row.append('Vehicle')
         elif 'CIBC' in row[1]:
-            row.append('Payment')
+            continue
+            #row.append('Payment')
         elif [True for x in boozeList if x in row[1].lower()]:
             row.append('Booze')
         elif [True for x in subscriptionList if x in row[1].lower()]:
@@ -95,30 +99,40 @@ with open(file, newline='') as csvfile:
         #removing negative
         absoluteval = abs(float(row[2]))
         row[2] = absoluteval
-        print(row)
+        #print(row)
         #print(row[2])
         datastorage.append(row)
         if row[3] == 'Uncategorized' :
-            print(row[1] , row[2])
+            print(row[1] , row[2], 'Unclassified')
         
         #determine month
         adate = datastorage[rowcount][0]
         datest = datetime.datetime.strptime(adate,"%m/%d/%Y")
-        print(datest)
+        #print(datest)
 
         #append to correct month
-
         #append row values to allExpensesByMonth Dict
         targetMonth = months[str(datest.month)]
-        print(targetMonth)
+        #print(targetMonth)
         allExpensesByMonth[targetMonth] = allExpensesByMonth[targetMonth] + [row]
+        CatSplit = row[1].split()
+        temp = len(CatSplit)
+        for y in range(0,temp):
+            CatSplitCheck = []
+                
+            CatSplitStorage.append(CatSplit)
+        
         rowcount += 1
                                             
+    
     print(f"There are {rowcount +1} rows in this file")
+    
 ExpenseSummaryByMonth = {}
+ExpenseSummaryByStore = {}
 #Function to determine total value for each category by month
 def sumMonth(monthlysummary):
     storageDict = {}
+    storeDict = {}
     for x in monthlysummary:
         #print(x[3])
         if x[3] not in storageDict:
@@ -126,26 +140,46 @@ def sumMonth(monthlysummary):
         else:
            currentval = storageDict[x[3]]
            storageDict[x[3]] = round(x[2] + currentval, 2)
+           
+    for b in monthlysummary:
+        if b[1] not in storeDict:
+            storeDict.setdefault(b[1],b[2])
+        else:
+            expense = storeDict[b[1]]
+            storeDict[b[1]] = round(b[2] + expense, 2)
+
     ExpenseSummaryByMonth[k] = storageDict
+    ExpenseSummaryByStore[k] = storeDict 
     if len(ExpenseSummaryByMonth[k]) > 0:
-        print(f'Monthly expenses for: {months[str(k)]}')
+        print(f'Monthly expenses for SumMonth: {months[str(k)]}')
         #@todo sort alphabetically first
-        sortedvals = sorted(ExpenseSummaryByMonth.keys())
-        for g, h in storageDict.items():
+        sortedvals = sorted(list(ExpenseSummaryByMonth[k].keys()))
 
-            print(g, ':', h)
-        print('\n\n\n')
+        #for g, h in storageDict.items():
 
+            #print(g, ':', h)
+        #print('\n\n\n')
+        
+        #print summary fo expenses for each store
+        #for n, m in storeDict.items():
+            #print(n, ':', m)
+        #print('\n\n\n')
+        for v in sortedvals:
+            print(v, ': $' + str(ExpenseSummaryByMonth[k][v]))
+        print('\n')
+            #print(v, ':', ExpenseSummaryByMonth[v])
+       
 
-#sumMonth(Jun)
-#sumMonth(Jul)
 for k in months:
     sumMonth(allExpensesByMonth[months[k]])
+#create plots
+
+
 
 #create list from dict
-forGraphing = ExpenseSummaryByMonth['7']
+forGraphing = ExpenseSummaryByMonth['8']
 listGraph = forGraphing.keys()
-print(listGraph)
+#print(listGraph)
 graphlist = []
 graphlist2 = []
 valuesOnly = []
@@ -167,5 +201,17 @@ for c in listGraph:
 data1 = valuesOnly
 arr1 = np.array(data1)
 arr2 = np.empty((4,3))
+plt.pie(valuesOnly, labels = graphlist, autopct='%.2f')
+
+
 
 #plt.pie(valuesOnly)
+def SummaryL(SearchID, MthList):
+    print('ghg')
+    for x in MthList:
+        print(MthList)
+        if str(MthList[x][3]) in SearchID:
+            print(MthList)
+        else:
+            continue
+#SummaryL(1,forGraphing)            
