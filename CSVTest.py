@@ -6,8 +6,8 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime,calendar
 
-file2 = 'E:/Downloads/2022Scotia.csv'
-file = 'D:/pcbanking5.csv'
+file = 'E:/Downloads/pcbanking2022.csv'
+file2 = 'D:/pcbanking5.csv'
 datastorage =[]
 date = []
 item = []
@@ -28,25 +28,26 @@ for x in range(1,13):
     months[month] = val
     allExpensesByMonth[val] = []
 
-grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside']
+grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside', 'bulk barn']
 takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill',
                'little caesars',"kelsey",'zaffran','mount molson','pho','aramark',
-               'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke']
-hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot']
-reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster']
-householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's"]
-gaslist = ['mrgas','ultramar','shell','esso']
-vehiclecat = ['autoparts','mto']
-subscriptionList = ['google','disney','globe and mail','siriusxm','spotify']
-dogList = ['animal hosp']
-boozeList = ['beer store','lcbo']
-clothingList = ['oshkosh','calikids','sport chek']
-schoolStuff = ['rcdsb','well.ca']
+               'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke',
+               'skipthedishes', 'thai', 'a & w']
+hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot','WWW.CANADIANTIRE.CA']
+reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster', 'RIPLEYSAQUARIUM','town of petawawa']
+householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's",'indigo','value village']
+gaslist = ['mrgas','ultramar','shell','esso', 'petrocan']
+vehiclecat = ['autoparts','mto', 'line-x', 'murphy ford', 'TRUE-CENTRE']
+subscriptionList = ['google','disney','globe and mail','siriusxm','spotify','the athletic']
+dogList = ['animal hosp', 'petsmart', 'bright eyes']
+boozeList = ['beer store','lcbo', 'dog house']
+clothingList = ['oshkosh','calikids','sportchek', 'decathalon']
+schoolStuff = ['rcdsb','well.ca','TEACHERSPAYTEACHERS.COM']
 
 rowcount = 0
 colcount = 0
 
-
+#Assigns category to expense and 
 with open(file, newline='') as csvfile:
 
     reader = csv.reader(csvfile, delimiter=',')
@@ -73,7 +74,7 @@ with open(file, newline='') as csvfile:
         elif [True for x in subscriptionList if x in row[1].lower()]:
             row.append('Subscriptions')
         elif [True for x in dogList if x in row[1].lower()]:
-            row.append('Vet Bills')
+            row.append('Dog Bills')
         elif [True for x in clothingList if x in row[1].lower()]:
             row.append('Clothing')
         elif [True for x in schoolStuff if x in row[1].lower()]:
@@ -92,27 +93,30 @@ with open(file, newline='') as csvfile:
         
         #determine month
         adate = datastorage[rowcount][0]
-        datest = datetime.datetime.strptime(adate,"%m/%d/%Y")
+        datestring = datetime.datetime.strptime(adate,"%m/%d/%Y")
         #append to correct month
         #for x in months:
             #print('MONTH')
             #print(months[str(x)]) # prints month string
             #print(str(v))
-        
-        if datest.month == 7:
+        ## THIS BLOCK IS ANTIQUATED
+        if datestring.month == 7:
             Jul.append(row)
-        if datest.month == 8:
+        if datestring.month == 8:
             Aug.append(row)
-        if datest.month == 6:
+        if datestring.month == 6:
             Jun.append(row)
         rowcount += 1
-        #for x in
-        #append row values to allExpensesByMonth Dict
-        targetMonth = months[str(datest.month)]
+        ##
+        
+        ###append row values to allExpensesByMonth Dict
+        targetMonth = months[str(datestring.month)]
         allExpensesByMonth[targetMonth] = allExpensesByMonth[targetMonth] + [row]
 
                                             
     print(f"There are {rowcount +1} rows in this file")
+
+#End of 
 ExpenseSummaryByMonth = {}
 #Function to determine total value for each category by month
 def sumMonth(monthlysummary):
@@ -150,6 +154,7 @@ for c in listGraph:
     graphlist.append([c, forGraphing[c] ])
     #graphlist.append(str(c))
     #graphlist.append(forGraphing[c])
+print('Here:')
 print(graphlist)
 
-listGraph.values()
+#listGraph.values()
