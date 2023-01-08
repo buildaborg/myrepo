@@ -4,10 +4,10 @@ Created on Tue Jun 28 13:17:26 2022
 
 @author: Steve
 """
-import csv, datetime,calendar
+import csv, datetime, calendar
 
-file = 'E:/Downloads/pcbanking2022.csv'
-file2 = 'D:/pcbanking5.csv'
+file2 = 'E:/Downloads/pcbanking2022.csv'
+file = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -89,7 +89,7 @@ with open(file, newline='') as csvfile:
         #print(row[2])
         datastorage.append(row)
         if row[3] == 'Uncategorized' :
-            print(row[1] , row[2])
+            print(row[1] , row[2], row[0])
         
         #determine month
         adate = datastorage[rowcount][0]
@@ -156,5 +156,16 @@ for c in listGraph:
     #graphlist.append(forGraphing[c])
 print('Here:')
 print(graphlist)
+
+## FUNCTION - to see montly costs and average
+
+searchval = input('What category did you want? /n')
+valsum = 0
+
+for x in ExpenseSummaryByMonth:
+    print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))
+    valsum = valsum + int(ExpenseSummaryByMonth[str(x)][str(searchval)])
+averagemonthlySpend = valsum / 12
+print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
 
 #listGraph.values()
