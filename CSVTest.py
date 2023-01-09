@@ -6,8 +6,8 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime, calendar
 
-file2 = 'E:/Downloads/pcbanking2022.csv'
-file = 'D:/pcbanking2022.csv'
+file = 'E:/Downloads/pcbanking2022.csv'
+file2 = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -28,21 +28,21 @@ for x in range(1,13):
     months[month] = val
     allExpensesByMonth[val] = []
 
-grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside', 'bulk barn']
+grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','mapleside', 'bulk barn', 'costco']
 takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill',
                'little caesars',"kelsey",'zaffran','mount molson','pho','aramark',
                'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke',
-               'skipthedishes', 'thai', 'a & w']
-hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot','WWW.CANADIANTIRE.CA']
-reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster', 'RIPLEYSAQUARIUM','town of petawawa']
-householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's",'indigo','value village']
+               'skipthedishes', 'thai', 'a & w', 'fijisan', 'j  es', 'swiss chalet']
+hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot','canadiantire']
+reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster', 'ripleys','town of petawawa']
+householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's",'indigo','value village', 'mckie']
 gaslist = ['mrgas','ultramar','shell','esso', 'petrocan']
-vehiclecat = ['autoparts','mto', 'line-x', 'murphy ford', 'TRUE-CENTRE']
+vehiclecat = ['autoparts','mto', 'line-x', 'murphy ford', 'true-centre']
 subscriptionList = ['google','disney','globe and mail','siriusxm','spotify','the athletic']
 dogList = ['animal hosp', 'petsmart', 'bright eyes']
 boozeList = ['beer store','lcbo', 'dog house']
-clothingList = ['oshkosh','calikids','sportchek', 'decathalon']
-schoolStuff = ['rcdsb','well.ca','TEACHERSPAYTEACHERS.COM']
+clothingList = ['oshkosh','calikids','sportchek', 'decathlon']
+schoolStuff = ['rcdsb','well.ca','teacherspayteachers']
 
 rowcount = 0
 colcount = 0
@@ -158,14 +158,28 @@ print('Here:')
 print(graphlist)
 
 ## FUNCTION - to see montly costs and average
-
+'''###
 searchval = input('What category did you want? /n')
 valsum = 0
 
 for x in ExpenseSummaryByMonth:
     print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))
     valsum = valsum + int(ExpenseSummaryByMonth[str(x)][str(searchval)])
-averagemonthlySpend = valsum / 12
+averagemonthlySpend = round((valsum / 12),2)
 print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
+print(f'You spent ${valsum} on {searchval} in {datestring.year}')
+'''
+#Function to create Summary - could also have input within fucntion and while loop
+def test_function(searchval):
+    
+    valsum = 0
+    for x in ExpenseSummaryByMonth:
+        print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))
+        valsum = valsum + int(ExpenseSummaryByMonth[str(x)][str(searchval)])
+    averagemonthlySpend = round((valsum / 12),2)
+    print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
+    print(f'You spent ${valsum} on {searchval} in {datestring.year}')
+
+#test_function(input('What Would you like to search?'))
 
 #listGraph.values()
