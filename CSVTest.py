@@ -6,8 +6,8 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime, calendar
 
-file = 'E:/Downloads/pcbanking2022.csv'
-file2 = 'D:/pcbanking2022.csv'
+file2 = 'E:/Downloads/pcbanking2022.csv'
+file = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -106,14 +106,25 @@ with open(file, newline='') as csvfile:
             Aug.append(row)
         if datestring.month == 6:
             Jun.append(row)
+        
+      
+        
         rowcount += 1
         ##
+
+
         
         ###append row values to allExpensesByMonth Dict
         targetMonth = months[str(datestring.month)]
         allExpensesByMonth[targetMonth] = allExpensesByMonth[targetMonth] + [row]
-
-                                            
+      #saving each expense to CSV file
+    CSV = open('D:/CSVTest.csv', 'w', newline = '')
+    
+    writer = csv.writer(CSV)
+    print('sdfbhu4bf87')
+    writer.writerows(datastorage)
+    CSV.close()
+                  
     print(f"There are {rowcount +1} rows in this file")
 
 #End of 
@@ -174,7 +185,10 @@ def test_function(searchval):
     
     valsum = 0
     for x in ExpenseSummaryByMonth:
+        ExpenseSummaryByMonth[x].setdefault(searchval, '0')
         print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))
+        
+        
         valsum = valsum + int(ExpenseSummaryByMonth[str(x)][str(searchval)])
     averagemonthlySpend = round((valsum / 12),2)
     print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
