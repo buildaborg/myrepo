@@ -127,9 +127,12 @@ with open(file, newline='') as csvfile:
                   
     print(f"There are {rowcount +1} rows in this file")
 
-#End of 
+ 
 ExpenseSummaryByMonth = {}
+
 #Function to determine total value for each category by month
+#ExpenseSummaryByMonth lists each months total for each category
+#identified by month number as the dict key
 def sumMonth(monthlysummary):
     storageDict = {}
     for x in monthlysummary:
@@ -149,7 +152,21 @@ def sumMonth(monthlysummary):
             print(g, ':', h)
         print('\n\n\n')
 
-
+#summarizes how many time a store was visited
+need to fix this
+purchaseSum_dict = {}
+def transaction_summary():
+    for x in datastorage:
+        #currentCell = datastorage[x][1]
+        if str(datastorage[x][1]) not in purchaseSum_dict.items():
+            purchaseSum_dict.setdefault(datastorage[x][1],0)
+        else:
+            purchaseSum_dict[x] = purchaseSum_dict[x] + 1
+            
+    print(purchaseSum_dict)
+   
+transaction_summary()
+print('TRANSACTION SUMMARY')     
 #sumMonth(Jun)
 #sumMonth(Jul)
 for k in months:
@@ -158,14 +175,14 @@ for k in months:
 #create list from dict
 forGraphing = ExpenseSummaryByMonth['7']
 listGraph = forGraphing.keys()
-print(listGraph)
+#print(listGraph)
 graphlist = []
 
 for c in listGraph:
     graphlist.append([c, forGraphing[c] ])
     #graphlist.append(str(c))
     #graphlist.append(forGraphing[c])
-print('Here:')
+#print('Here:')
 print(graphlist)
 
 ## FUNCTION - to see montly costs and average
@@ -181,7 +198,7 @@ print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
 print(f'You spent ${valsum} on {searchval} in {datestring.year}')
 '''
 #Function to create Summary - could also have input within fucntion and while loop
-def test_function(searchval):
+def summary_stats(searchval):
     
     valsum = 0
     for x in ExpenseSummaryByMonth:
