@@ -6,8 +6,10 @@ Created on Tue Jun 28 13:17:26 2022
 """
 import csv, datetime, calendar
 
-file2 = 'E:/Downloads/pcbanking2022.csv'
-file = 'D:/pcbanking2022.csv'
+outputFile = 'S:/Python/CSVTest.csv'
+file = 'E:/Downloads/pcbanking2022.csv'
+outputFile2 = 'D:/CSVTest.csv'
+file2 = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -118,14 +120,19 @@ with open(file, newline='') as csvfile:
         targetMonth = months[str(datestring.month)]
         allExpensesByMonth[targetMonth] = allExpensesByMonth[targetMonth] + [row]
       #saving each expense to CSV file
-    CSV = open('D:/CSVTest.csv', 'w', newline = '')
+    CSV = open(outputFile, 'w', newline = '')
     
     writer = csv.writer(CSV)
-    print('sdfbhu4bf87')
+
     writer.writerows(datastorage)
     CSV.close()
                   
     print(f"There are {rowcount +1} rows in this file")
+
+#function to split and match similar entries
+splitclass = []
+for x in datastorage:
+    print
 
  
 ExpenseSummaryByMonth = {}
@@ -144,31 +151,47 @@ def sumMonth(monthlysummary):
            storageDict[x[3]] = round(x[2] + currentval, 2)
     ExpenseSummaryByMonth[k] = storageDict
     if len(ExpenseSummaryByMonth[k]) > 0:
-        print(f'Monthly expenses for: {months[str(k)]}')
+        #print(f'Monthly expenses for: {months[str(k)]}')
         #@todo sort alphabetically first
         sortedvals = sorted(ExpenseSummaryByMonth.keys())
-        for g, h in storageDict.items():
+        #for g, h in storageDict.items():
 
-            print(g, ':', h)
-        print('\n\n\n')
+            #print(g, ':', h)
+        #print('\n\n\n')
 
 #summarizes how many time a store was visited
-need to fix this
-purchaseSum_dict = {}
+#add a line for the total cost for each store
+
+
 def transaction_summary():
+    purchaseSum_dict = {}
+    counter = 0
     for x in datastorage:
-        #currentCell = datastorage[x][1]
-        if str(datastorage[x][1]) not in purchaseSum_dict.items():
-            purchaseSum_dict.setdefault(datastorage[x][1],0)
+        targetcell = datastorage[counter][1]
+   
+        if targetcell not in purchaseSum_dict:
+            purchaseSum_dict.setdefault(datastorage[counter][1],1)
+            #for testing only
+            #if 'AMZN' in targetcell:
+                #print(targetcell)
+            #else:
+                #print('not in target cell')
         else:
-            purchaseSum_dict[x] = purchaseSum_dict[x] + 1
+            #print(purchaseSum_dict[x[1]])
+            purchaseSum_dict[x[1]] = purchaseSum_dict[x[1]] + 1
+            #for testing only
+            #if 'AMZN' in targetcell:
+                #print(targetcell)
+            #else:
+                #print('not in target cell')
             
-    print(purchaseSum_dict)
+        counter += 1   
+    #print(purchaseSum_dict)
+    print('TRANSACTION SUMMARY')     
    
 transaction_summary()
-print('TRANSACTION SUMMARY')     
-#sumMonth(Jun)
-#sumMonth(Jul)
+
+#prints each months values using sumMonth function
 for k in months:
     sumMonth(allExpensesByMonth[months[k]])
 
@@ -203,14 +226,13 @@ def summary_stats(searchval):
     valsum = 0
     for x in ExpenseSummaryByMonth:
         ExpenseSummaryByMonth[x].setdefault(searchval, '0')
-        print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))
-        
+        print(months[str(x)] + ': $' + str(ExpenseSummaryByMonth[str(x)][str(searchval)]))        
         
         valsum = valsum + int(ExpenseSummaryByMonth[str(x)][str(searchval)])
     averagemonthlySpend = round((valsum / 12),2)
     print(f'On average you spend ${averagemonthlySpend} per month on {searchval}')
     print(f'You spent ${valsum} on {searchval} in {datestring.year}')
 
-#test_function(input('What Would you like to search?'))
+#summary_stats(input('What Would you like to search?'))
 
 #listGraph.values()
