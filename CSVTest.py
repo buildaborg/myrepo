@@ -131,10 +131,31 @@ with open(file, newline='') as csvfile:
 
 #function to split and match similar entries
 splitclass = []
+cnt = 0
+cellLength = 0
+splitList = []
 for x in datastorage:
-    print
+    ds = enumerate(datastorage[x])
+    cellSplit = datastorage[cnt][1].split()
+    cellLengthCheck = len(cellSplit)
+    #print(x)
+    splitclass.append(cellSplit)
+    cnt += 1
+    '''
+    if cellLengthCheck > cellLength:
+        cellLength = cellLengthCheck
+        print(cellLength)
+    else:
+        continue
+    print(f'Longest cell = {cellLength}')
+    '''
+evaluateMatch = []
+for line in range(len(splitclass)):
+    #do something
+    print('')
+    
+   
 
- 
 ExpenseSummaryByMonth = {}
 
 #Function to determine total value for each category by month
@@ -187,7 +208,7 @@ def transaction_summary():
             
         counter += 1   
     #print(purchaseSum_dict)
-    print('TRANSACTION SUMMARY')     
+    #print('TRANSACTION SUMMARY')     
    
 transaction_summary()
 
