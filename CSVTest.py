@@ -136,7 +136,9 @@ cnt = 0
 cellLength = 0
 splitList = []
 for x in datastorage:
-    #ds = enumerate(datastorage[x])
+
+    ds = enumerate(datastorage)
+
     cellSplit = datastorage[cnt][1].split()
     cellLengthCheck = len(cellSplit)
     #print(x)
