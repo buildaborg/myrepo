@@ -5,7 +5,7 @@ Created on Fri Jan 13 20:56:19 2023
 @author: mckeo
 """
 
-import urllib.request
+import urllib.request, csv
 
 from pprint import pprint
 
@@ -33,8 +33,15 @@ p.feed(xhtml)
 
 #pprint(p.tables[0])
 print('\n\nPANDAS DATAFRAME\n')
-print(pd.DataFrame(p.tables))
+print(pd.DataFrame(p.tables[6]))
 
-tables = pd.read_html(Link)
-pprint(tables)
+tablename = pd.read_html(Link)
+pprint(tablename[1])
 
+outputFile = 'D:/ScrapingTest.csv'
+CSV = open(outputFile, 'w', newline = '')
+
+writer = csv.writer(CSV)
+
+writer.writerows(p.tables[6])
+CSV.close()

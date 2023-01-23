@@ -5,11 +5,12 @@ Created on Tue Jun 28 13:17:26 2022
 @author: Steve
 """
 import csv, datetime, calendar
+import numpy as np
 
-outputFile = 'S:/Python/CSVTest.csv'
-file = 'E:/Downloads/pcbanking2022.csv'
-outputFile2 = 'D:/CSVTest.csv'
-file2 = 'D:/pcbanking2022.csv'
+outputFile2 = 'S:/Python/CSVTest.csv'
+file2 = 'E:/Downloads/pcbanking2022.csv'
+outputFile = 'D:/CSVTest.csv'
+file = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -135,7 +136,7 @@ cnt = 0
 cellLength = 0
 splitList = []
 for x in datastorage:
-    ds = enumerate(datastorage[x])
+    #ds = enumerate(datastorage[x])
     cellSplit = datastorage[cnt][1].split()
     cellLengthCheck = len(cellSplit)
     #print(x)
