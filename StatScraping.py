@@ -58,6 +58,10 @@ tsnlink = url_get_contents(tsn_game_summary)
 soup2 = BeautifulSoup(tsnlink, 'lxml')
 #beautfil soup links
 
+divs  = []
+div_soup = soup2.find('div', attrs={'class = bms-event-advanced-stats__shots-container'})
+print(div_soup)
+ 
 req2 = urllib.request.Request(Link)
 html_page = urllib.request.urlopen(req2)
 soup = BeautifulSoup(html_page, 'lxml')
@@ -67,20 +71,20 @@ for link in soup.find_all('a'):
     
     links.append(link.get('href'))
     
-print(links)
+print(soup.prettify())
 
-divs = []
+divy = []
 for div in soup2.find_all('div'):
-    divs.append(div.get('div class = "bms-event-advanced-stats__shots-container"'))
+    divy.append(div.get('bms-event-advanced-stats__shots-container'))
 
-print(divs)
+print(divy)
 
-
-
-
+exr = soup2.find_all('div')
 
 
-divs = soup.find_all("div", {'class':'cell'})
+
+
+divys = soup.find_all("div", {'class':'bms-event-advanced-stats__shots-container'})
 
 
 '''
