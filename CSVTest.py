@@ -7,10 +7,10 @@ Created on Tue Jun 28 13:17:26 2022
 import csv, datetime, calendar
 import numpy as np
 
-outputFile = 'S:/Python/CSVTest.csv'
-file = 'E:/Downloads/pcbanking2022.csv'
-outputFile2 = 'D:/CSVTest.csv'
-file2 = 'D:/pcbanking2022.csv'
+outputFile2 = 'S:/Python/CSVTest.csv'
+file2 = 'E:/Downloads/pcbanking2022.csv'
+outputFile = 'D:/CSVTest.csv'
+file = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -212,7 +212,9 @@ def transaction_summary():
         counter += 1   
     #print(purchaseSum_dict)
     #print('TRANSACTION SUMMARY')     
-   
+    return purchaseSum_dict
+    print(purchaseSum_dict)
+
 transaction_summary()
 
 #prints each months values using sumMonth function
