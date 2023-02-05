@@ -7,10 +7,10 @@ Created on Tue Jun 28 13:17:26 2022
 import csv, datetime, calendar
 import numpy as np
 
-outputFile2 = 'S:/Python/CSVTest.csv'
-file2 = 'E:/Downloads/pcbanking2022.csv'
-outputFile = 'D:/CSVTest.csv'
-file = 'D:/pcbanking2022.csv'
+outputFile = 'S:/Python/CSVTest.csv'
+file = 'E:/Downloads/pcbanking2022.csv'
+outputFile2 = 'D:/CSVTest.csv'
+file2 = 'D:/pcbanking2022.csv'
 datastorage =[]
 date = []
 item = []
@@ -35,17 +35,17 @@ grocerylist = ['hyska', "steven & julie's", 'pc express','food basics','maplesid
 takeoutlist = ['mcdonald',"wendy's",'hortons','dairy queen','starbucks','grill',
                'little caesars',"kelsey",'zaffran','mount molson','pho','aramark',
                'mcgees','dominos','subway','nelson street pub','boston pizza','valleysmoke',
-               'skipthedishes', 'thai', 'a & w', 'fijisan', 'j  es', 'swiss chalet']
-hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot','canadiantire']
-reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster', 'ripleys','town of petawawa']
+               'skipthedishes', 'thai', 'a & w', 'fijisan', 'j  es', 'swiss chalet', 'milano']
+hardwarelist = ['cdn tire','rona','home harware','peaveymart','home depot','canadiantire', 'lee valley']
+reclist = ['mecp','hugli','starz in motion','prohockeylife','ticketmaster', 'ripleys','town of petawawa', 'museum']
 householdlist = ['amazon',"hubert's",'wal-mart','dollarama','amzn','shoppers','looking glass','siegel','rexall',"mac's",'indigo','value village', 'mckie']
-gaslist = ['mrgas','ultramar','shell','esso', 'petrocan']
+gaslist = ['mrgas','ultramar','shell','esso', 'petrocan','hamilton convenience']
 vehiclecat = ['autoparts','mto', 'line-x', 'murphy ford', 'true-centre']
 subscriptionList = ['google','disney','globe and mail','siriusxm','spotify','the athletic']
 dogList = ['animal hosp', 'petsmart', 'bright eyes']
 boozeList = ['beer store','lcbo', 'dog house']
-clothingList = ['oshkosh','calikids','sportchek', 'decathlon']
-schoolStuff = ['rcdsb','well.ca','teacherspayteachers']
+clothingList = ['oshkosh','calikids','sportchek', 'decathlon', 'sport chek']
+schoolStuff = ['rcdsb','well.ca','teacherspayteachers', 'canva']
 
 rowcount = 0
 colcount = 0
@@ -89,10 +89,10 @@ with open(file, newline='') as csvfile:
         cat = row[3]
         absoluteval = abs(float(row[2]))
         row[2] = absoluteval
-        #print(row[2])
+        #adds row to datastorage file
         datastorage.append(row)
         if row[3] == 'Uncategorized' :
-            print(row[1] , row[2], row[0])
+            print(row[1], '- ', row[2],'- ', row[0],'- ', row[3])
         
         #determine month
         adate = datastorage[rowcount][0]
@@ -152,10 +152,10 @@ for x in datastorage:
         continue
     print(f'Longest cell = {cellLength}')
     '''
-evaluateMatch = []
-for line in range(len(splitclass)):
+#evaluateMatch = []
+#for line in range(len(splitclass)):
     #do something
-    print('')
+    #print('')
     
    
 
